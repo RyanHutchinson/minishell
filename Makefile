@@ -6,13 +6,13 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/08/06 09:00:38 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/08/06 13:08:50 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	minishell
 
-SRC =	main.c norm.c error.c built_ins.c engine.c
+SRC =	main.c norm.c error.c built_ins.c engine.c exec.c echo.c env.c cd.c
 
 DIR_O = obj
 DIR_S = srcs

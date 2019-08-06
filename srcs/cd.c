@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 13:19:59 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 13:20:44 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/08/06 12:02:29 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 13:17:01 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_error(void)
+void	ft_cd(char **commands)
 {
-	if (error == 1)
-		ft_printf("\033[0;31mMemmory could not be allocated.\033[0m\n");
-	else if (error == 2)
-		ft_printf("\033[0;31mNot a valid command.\033[0m\n");
-	error = 0;
+	(void)commands;
+	ft_printf("\n\033[1;35m'cd' not currently implememted.\033[0m\n\n");
 }
