@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 12:06:01 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/08/06 15:23:38 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@
 char    **environment;
 int     error;
 
+//-------------ENVIRONMENT------------------------------------------------------
 void	ft_get_env(char **env);
+void	ft_realloc_env_plus(char **env);
+void	ft_realloc_env_minus(char **env);
+//-------------ENVIRONMENT------------------------------------------------------
 
 void    ft_get_prompt(char **prompt);
 void    ft_command_parser(char *commands);

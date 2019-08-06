@@ -6,13 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:20:06 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 13:39:44 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/08/06 14:54:30 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-//git is being weird
 
 int	main(int ac, char **av, char **env)
 {

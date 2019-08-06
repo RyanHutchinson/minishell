@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 10:36:52 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/05 15:56:34 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 10:36:52 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 15:38:42 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	if (str == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len && str[i] != '\0')
+	while (i < len)
 	{
+		if (s[start + i + 1] == '\0')
+			break ;
 		str[i] = s[start + i];
 		i++;
 	}
