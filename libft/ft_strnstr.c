@@ -3,31 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fremoor <fremoor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 09:24:16 by fremoor           #+#    #+#             */
-/*   Updated: 2019/07/10 15:26:33 by fremoor          ###   ########.fr       */
+/*   Created: 2019/05/17 09:46:22 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:34:24 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-char	*ft_strnstr(char *str, char *to_find, size_t n)
+char	*ft_strnstr(const char *str1, const char *str2, size_t len)
 {
-	size_t str_len;
-	size_t find_len;
+	size_t	loop;
+	size_t	inloop;
 
-	if (!*to_find)
-		return ((char *)str);
-	find_len = ft_strlen(to_find);
-	str_len = ft_strlen(str);
-	while (*str && n >= find_len && find_len <= str_len)
+	loop = 0;
+	if (ft_strlen(str2) == 0)
+		return ((char*)str1);
+	while (str1[loop] != '\0' && loop < len)
 	{
-		if (!ft_strncmp(str, to_find, find_len))
-			return ((char *)str);
-		n--;
-		str_len--;
-		str++;
+		inloop = 0;
+		while (str2[inloop] == str1[loop + inloop] && loop + inloop < len)
+			if (str2[++inloop] == '\0')
+				return ((char*)&str1[loop]);
+		loop++;
 	}
 	return (NULL);
 }

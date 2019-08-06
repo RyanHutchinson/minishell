@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
+#    By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/08/06 15:21:29 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/08/06 19:52:23 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ DIR_S = srcs
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJECTS = $(addprefix $(DIR_O)/,$(SRC:.c=.o))
 
-INCL = -I./includes/minishell.h -I./libft/includes/libft.h
+INCL = -I./includes -I./libft/includes
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
 	@echo "\033[1;35;m[Compiling $<] \t\033[0m"

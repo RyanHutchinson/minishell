@@ -3,52 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 08:29:17 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/06 10:39:47 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/27 12:11:09 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:31:19 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-static int	n_len(long long n)
+char		*ft_itoa(int n)
 {
-	int i;
+	unsigned int	i;
+	char			*new;
+	long int		num;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	while (n)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
-char		*ft_itoa(long long n)
-{
-	int			neg;
-	long long	len;
-	char		*str;
-
-	neg = (n < 0 ? 1 : 0);
-	len = n_len(n);
-	str = ft_strnew((size_t)(len + neg));
-	if (!str)
+	i = ft_intlen(n);
+	if (!(new = ft_strnew(i)))
 		return (NULL);
-	if (neg == 1)
-		str[0] = '-';
-	else if (n > 0)
-		len--;
-	else
-		str[0] = '0';
-	while (n)
+	num = n;
+	if (n < 0)
+		num = num * -1;
+	new[i] = '\0';
+	i -= 1;
+	while (num >= 10)
 	{
-		str[len] = (n < 0) ? '0' + -(n % 10) : '0' + (n % 10);
-		n /= 10;
-		len--;
+		new[i] = (num % 10) + '0';
+		num = num / 10;
+		i -= 1;
 	}
-	return (str);
+	new[i] = num + '0';
+	i -= 1;
+	if (n < 0)
+		new[i] = '-';
+	return (new);
 }

@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 09:26:15 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:30:46 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 15:29:37 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:31:06 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_intlen(int num)
 {
-	int	sign;
-	int	ret;
 	int	i;
 
-	sign = 1;
-	ret = 0;
 	i = 0;
-	while (ft_iswhitespace(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i] == '-')
-		{
-			sign = -1;
-			i++;
-		}
-	while (ft_isdigit(str[i]) && str[i] != '\0')
+	if (num < 0)
 	{
-		ret *= 10;
-		ret += str[i] - '0';
+		num = num * -1;
 		i++;
 	}
-	return (ret * sign);
+	while (num >= 10)
+	{
+		num = num / 10;
+		i++;
+	}
+	i++;
+	return (i);
 }

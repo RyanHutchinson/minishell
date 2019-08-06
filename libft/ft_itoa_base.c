@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 09:26:15 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:30:46 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/06/13 09:10:59 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:31:17 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_itoa_base(long value, int base)
 {
-	int	sign;
-	int	ret;
-	int	i;
+	static char		*rep;
+	static char		buf[50];
+	char			*ptr;
+	long			num;
+	unsigned long	b;
 
-	sign = 1;
-	ret = 0;
-	i = 0;
-	while (ft_iswhitespace(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i] == '-')
-		{
-			sign = -1;
-			i++;
-		}
-	while (ft_isdigit(str[i]) && str[i] != '\0')
+	rep = "0123456789abcdef";
+	ptr = &buf[49];
+	*ptr = '\0';
+	num = value;
+	if (value < 0 && base == 10)
+		value *= -1;
+	b = (unsigned long)value;
+	if (b == 0)
+		*--ptr = rep[b % base];
+	while (b != 0)
 	{
-		ret *= 10;
-		ret += str[i] - '0';
-		i++;
+		*--ptr = rep[b % base];
+		b /= base;
 	}
-	return (ret * sign);
+	if (num < 0 && base == 10)
+		*--ptr = '-';
+	return (ptr);
 }

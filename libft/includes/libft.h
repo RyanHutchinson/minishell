@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 11:49:55 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/05 15:30:54 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/08/06 19:51:13 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,13 @@ typedef struct		s_format
 ** Int functions
 */
 
+int					ft_intlen(int num);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
+int					ft_iswhitespace(char c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_atoi(const char *str);
@@ -78,21 +80,22 @@ int					ft_memcmp(const void *str1, const void *str2, size_t n);
 ** Char functions
 */
 
-char				*ft_itoa(long long n);
+char				*ft_itoa(int n);
 char				*ft_strnew(size_t size);
 char				*ft_str_upper(char *str);
 char				*ft_strdup(const char *s);
+char				*ft_strndup(const char *str, size_t len);
 char				*ft_strtrim(char const *s);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
-char				*ft_strstr(char *str, char *to_find);
+char				*ft_strstr(const char *str1, const char *str2);
 char				*ft_strrstr(char *str, char *to_find);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strcpy(char *dest, const char *srcs);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strnstr(char *str, char *to_find, size_t n);
+char				*ft_strnstr(const char *str1, const char *str2, size_t len);
 char				*ft_strncat(char *dest, const char *src, size_t n);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

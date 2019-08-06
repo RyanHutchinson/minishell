@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 08:36:07 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/06 10:41:08 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/19 13:13:04 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:31:45 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-/*
-** The first if check for overlapping. The while loop runs from n -> 0
-** filling it from the back.
-*/
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (dest == NULL && src == NULL)
+	unsigned char	*ptr_dst;
+	unsigned char	*ptr_src;
+
+	ptr_dst = (unsigned char*)dst;
+	ptr_src = (unsigned char*)src;
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (dest < src)
-		ft_memcpy(dest, src, n);
+	if (ptr_dst > ptr_src)
+		while (len--)
+			ptr_dst[len] = ptr_src[len];
 	else
-		while (n--)
-			*(unsigned char *)(dest + n) = *(unsigned char *)(src + n);
-	return (dest);
+		dst = ft_memcpy(dst, src, len);
+	return (dst);
 }

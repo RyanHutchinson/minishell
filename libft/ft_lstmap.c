@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 08:27:28 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/06 10:40:11 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/27 15:34:51 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:31:30 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list		*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem))
 {
-	t_list *list;
-	t_list *head;
+	t_list *new;
+	t_list *scanner;
 
-	list = NULL;
-	if (lst && f)
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	scanner = f(lst);
+	new = scanner;
+	while (lst->next != NULL)
 	{
-		head = f(lst);
-		list = head;
+		scanner->next = f(lst->next);
+		scanner = scanner->next;
 		lst = lst->next;
-		while (lst)
-		{
-			head->next = f(lst);
-			head = head->next;
-			lst = lst->next;
-		}
 	}
-	return (list);
+	return (new);
 }

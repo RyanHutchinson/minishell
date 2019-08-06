@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fremoor <fremoor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 10:37:29 by fremoor           #+#    #+#             */
-/*   Updated: 2019/07/10 15:26:33 by fremoor          ###   ########.fr       */
+/*   Created: 2019/05/18 09:18:38 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 19:36:13 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,24 @@
 
 char	*ft_strtrim(char const *s)
 {
-	size_t start;
-	size_t end;
+	size_t			len;
+	unsigned int	start;
+	unsigned int	end;
+	char			*new;
 
-	if (!s)
-		return (NULL);
 	start = 0;
-	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+	if (s == NULL)
+		return (NULL);
+	len = ft_strlen(s);
+	if (ft_strlen(s) == 0)
+		return (ft_strnew(1));
+	while (ft_iswhitespace(s[start]) == 1 && s[start] != '\0')
 		start++;
-	if (s[start] == '\0')
-		return (ft_strnew(0));
-	end = ft_strlen(s) - 1;
-	while (s[end] == ' ' || s[end] == '\n' || s[end] == '\t')
+	end = len - 1;
+	while (ft_iswhitespace(s[end]) == 1 && end >= start)
 		end--;
-	return (ft_strsub(s, start, end - start + 1));
+	len = end - start + 1;
+	if (!(new = ft_strsub(s, start, len)))
+		return (NULL);
+	return (new);
 }
