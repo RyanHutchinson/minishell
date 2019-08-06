@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 08:34:43 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/06 10:41:05 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/08/06 08:49:47 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/08/06 10:29:02 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "../includes/minishell.h"
 
-void	ft_memdel(void **ap)
+void ft_command_parser(char *commands)
 {
-	if (ap)
+	char **arguments;
+
+	if (!(arguments = ft_strsplit(commands, ' ')))
+		error = 1;
+	if (ft_strequ(arguments[0], "env"))
+		ft_env();
+	else if (ft_strequ(arguments[0], "exit"))
 	{
-		free(*ap);
-		*ap = NULL;
+		ft_exit();
+		error = -1;
 	}
+	else
+		error = 2;
 }

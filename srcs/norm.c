@@ -1,22 +1,24 @@
 #include "../includes/minishell.h"
 
-int    ft_set_env(char **env)
+void    ft_set_env(char **env)
 {
 	int i;
 
 	i = 0;
 	while (env[i] != NULL)
 		i++;
-
-	if (!(environment = malloc(sizeof(char *) * i + 1)))
-		ft_error(1);
-	i = 0;
-	while (env[i] != NULL)
+	if ((environment = malloc(sizeof(char *) * i + 1)))
 	{
-		environment[i] = ft_strdup(env[i]);
-		i++;
+		i = 0;
+		while (env[i] != NULL)
+		{
+			environment[i] = ft_strdup(env[i]);
+			i++;
+		}
+		error = 0;
 	}
-	return (1);
+	else
+		error = 1;
 }
 
 void    ft_get_prompt(char **prompt)
@@ -34,9 +36,7 @@ void    ft_get_prompt(char **prompt)
 		}
 		i++;
 	}
-
 	int j = ft_strlen(tmp);
-
 	while (environment[i])
 	{
 		if (ft_strnstr(environment[i], "PWD=", 4))
@@ -47,5 +47,4 @@ void    ft_get_prompt(char **prompt)
 		i++;
 	}
 	*prompt = ft_strjoin(tmp, ": ");
-
 }

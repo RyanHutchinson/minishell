@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fremoor <fremoor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 08:29:17 by fremoor           #+#    #+#             */
-/*   Updated: 2019/07/10 15:26:33 by fremoor          ###   ########.fr       */
+/*   Updated: 2019/08/06 10:39:47 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
-
-/*
-** n_len gets the length of the number as chars, e.g. 10 would be 2 and 234 = 3
-*/
 
 static int	n_len(long long n)
 {
@@ -30,11 +26,6 @@ static int	n_len(long long n)
 	}
 	return (i);
 }
-
-/*
-** ft_itoa fills the string char by char by modding the number by ten to get
-** the last number and then divs it by 10 to move it up one digit
-*/
 
 char		*ft_itoa(long long n)
 {
