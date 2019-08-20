@@ -3,38 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 12:11:09 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:31:19 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 08:29:17 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:25:30 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
+
+/*
+** n_len gets the length of the number as chars, e.g. 10 would be 2 and 234 = 3
+*/
+
+static int	n_len(int n)
+{
+	int i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+/*
+** ft_itoa fills the string char by char by modding the number by ten to get
+** the last number and then divs it by 10 to move it up one digit
+*/
 
 char		*ft_itoa(int n)
 {
-	unsigned int	i;
-	char			*new;
-	long int		num;
+	int		neg;
+	int		len;
+	char	*str;
 
-	i = ft_intlen(n);
-	if (!(new = ft_strnew(i)))
+	neg = (n < 0 ? 1 : 0);
+	len = n_len(n);
+	str = ft_strnew((size_t)(len + neg));
+	if (!str)
 		return (NULL);
-	num = n;
-	if (n < 0)
-		num = num * -1;
-	new[i] = '\0';
-	i -= 1;
-	while (num >= 10)
+	if (neg == 1)
+		str[0] = '-';
+	else if (n > 0)
+		len--;
+	else
+		str[0] = '0';
+	while (n)
 	{
-		new[i] = (num % 10) + '0';
-		num = num / 10;
-		i -= 1;
+		str[len] = (n < 0) ? '0' + -(n % 10) : '0' + (n % 10);
+		n /= 10;
+		len--;
 	}
-	new[i] = num + '0';
-	i -= 1;
-	if (n < 0)
-		new[i] = '-';
-	return (new);
+	return (str);
 }

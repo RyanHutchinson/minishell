@@ -1,6 +1,8 @@
-NAME =		libft.a
+NAME = libft.a
 
-SRC =		ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
+INC = libft.h
+
+SRC_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_isdigit.c ft_isprint.c ft_itoa.c ft_lstadd.c ft_lstdel.c \
 	  ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_memalloc.c \
 	  ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c \
@@ -12,25 +14,35 @@ SRC =		ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c \
 	  ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
 	  ft_tolower.c ft_toupper.c ft_foreach.c ft_strrev.c ft_factorial.c \
-	  ft_sqrt.c ft_power.c ft_str_upper.c ft_extra.c ft_flags.c ft_middle.c \
-	  ft_misc.c ft_printing.c ft_printf.c ft_strfill.c ft_middle_2.c \
-	  get_next_line.c ft_strrstr.c ft_iswhitespace.c ft_intlen.c ft_strndup.c
+	  ft_sqrt.c ft_power.c get_next_line.c ft_freestrarray.c ft_pathjoin.c \
+	  ft_starts_with.c ft_strjoinchf.c ft_strjoinf.c ft_strjoinch.c \
+	  ft_remnchars.c ft_strdupdel.c ft_iswhitespace.c
 
-OBJ = $(SRC:.c=.o)
+SRC_PATH = ./
 
-INCL = includes/libft.h
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
+
+SRCO = $(patsubst %.c, %.o, $(SRC))
+
+FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME):
-	gcc -c -Wall -Werror -Wextra $(SRC)
-	ar rv $(NAME) $(OBJ) $(INCL)
-	ranlib $(NAME)
+$(NAME): $(SRCO)
+	@ar rc $(NAME) $(SRCO)
+	@echo "\033[92mLibrary Compiled."
+
+$(SRC_PATH)%.o: $(SRC_PATH)%.c
+	@gcc $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(SRCO)
+	@echo "\033[93mLibrary Object Files Removed."
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "\033[93mLibrary Removed."
 
-re: fclean all
+re:	fclean all
+
+.PHONY: all fclean clean re

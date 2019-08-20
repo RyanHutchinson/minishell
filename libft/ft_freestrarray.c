@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_freestrarray.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 12:02:29 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 13:17:01 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 13:49:24 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/23 13:35:54 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-void	ft_cd(char **commands)
+void	ft_freestrarray(char **str)
 {
-	(void)commands;
-	ft_printf("\n\033[1;35m'cd' not currently implememted.\033[0m\n\n");
+	int		i;
+
+	i = 0;
+	while ((str)[i])
+		free((str)[i++]);
+	free(str);
 }

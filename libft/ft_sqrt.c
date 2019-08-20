@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 16:03:46 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:32:14 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/22 14:46:50 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:25:48 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./includes/libft.h"
 
 int	ft_sqrt(int nb)
 {

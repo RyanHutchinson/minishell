@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 14:25:11 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:35:03 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/22 14:25:11 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:26:10 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
 char	*ft_strrev(char *str)
 {

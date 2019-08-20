@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 11:13:14 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:32:22 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 08:49:52 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:25:55 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
 void	ft_strdel(char **as)
 {
-	if (as != NULL)
+	if (as)
 	{
 		free(*as);
 		*as = NULL;

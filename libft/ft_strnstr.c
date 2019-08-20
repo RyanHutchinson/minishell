@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 09:46:22 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:34:24 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 09:24:16 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:26:08 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
-char	*ft_strnstr(const char *str1, const char *str2, size_t len)
+char	*ft_strnstr(char *str, char *to_find, size_t n)
 {
-	size_t	loop;
-	size_t	inloop;
+	size_t str_len;
+	size_t find_len;
 
-	loop = 0;
-	if (ft_strlen(str2) == 0)
-		return ((char*)str1);
-	while (str1[loop] != '\0' && loop < len)
+	if (!*to_find)
+		return ((char *)str);
+	find_len = ft_strlen(to_find);
+	str_len = ft_strlen(str);
+	while (*str && n >= find_len && find_len <= str_len)
 	{
-		inloop = 0;
-		while (str2[inloop] == str1[loop + inloop] && loop + inloop < len)
-			if (str2[++inloop] == '\0')
-				return ((char*)&str1[loop]);
-		loop++;
+		if (!ft_strncmp(str, to_find, find_len))
+			return ((char *)str);
+		n--;
+		str_len--;
+		str++;
 	}
 	return (NULL);
 }

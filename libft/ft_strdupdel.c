@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdupdel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: mbotes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 16:09:06 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:32:26 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/06/05 16:09:06 by mbotes            #+#    #+#             */
+/*   Updated: 2019/06/05 16:10:06 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
 char	*ft_strdupdel(char **str)
 {

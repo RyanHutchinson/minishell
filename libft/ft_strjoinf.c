@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_replacechr.c                                    :+:      :+:    :+:   */
+/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 16:03:46 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:32:09 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 13:49:48 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/17 13:54:44 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
-char	*ft_replacechr(char **str, char f, char r)
+char		*ft_strjoinf(char *s1, char *s2)
 {
-	char	*ptr;
+	char	*new;
 
-	if ((ptr = ft_strchr(*str, f)) == NULL)
-		return (NULL);
-	*ptr = r;
-	return (ptr);
+	new = ft_strjoin(s1, s2);
+	free(s1);
+	s1 = NULL;
+	return (new);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_starts_with.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 10:05:32 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:36:19 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 13:49:36 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/17 13:54:18 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
-void	ft_swap(int *a, int *b)
+int		ft_starts_with(char *to_start, char *str)
 {
-	int c;
+	int		i;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	i = 0;
+	while (to_start[i] && str[i] && (to_start[i] == str[i]))
+		i++;
+	return (to_start[i] == '\0' ? 1 : 0);
 }

@@ -3,67 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 08:33:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:35:28 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 10:34:20 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:26:11 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-static int	ft_wordcount(const char *str, char c)
+/*
+** Word_len gets the length of the word. It also skips over 1 or multiple
+** chars. It then sends back the length of the word to ft_strsplit
+*/
+
+static int	word_len(char const *str, char c)
 {
-	size_t	i;
-	size_t	k;
+	int i;
+	int temp;
 
 	i = 0;
-	k = 0;
-	while (str[i] != '\0')
+	temp = 0;
+	while (*str)
 	{
-		while (str[i] == c)
+		if (temp == 1 && *str == c)
+			temp = 0;
+		if (temp == 0 && *str != c)
+		{
+			temp = 1;
 			i++;
-		while (str[i] != c && str[i] != '\0')
-			i++;
-		if (str[i] != '\0' || str[i - 1] != c)
-			k++;
+		}
+		str++;
 	}
-	return (k);
+	return (i);
 }
 
-static char	**ft_wordadd(const char *str, char c, char **new)
-{
-	size_t	i;
-	size_t	j;
-	size_t	k;
+/*
+** ft_strsplit first gets the length of the words and then mallocs enough
+** space for it in the array. After the malloc, the while loop runs thourgh
+** the const char and inserts char for char unless its a bad char
+** at the end it returns the array made within ft_strsplit
+*/
 
+char		**ft_strsplit(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		len;
+	int		start;
+	char	**ret;
+
+	if ((s == NULL) || (c == 0))
+		return (NULL);
+	len = word_len(s, c);
+	if (!(ret = malloc((sizeof(char *)) * (len + 1))))
+		return (NULL);
 	i = 0;
-	j = 0;
-	while (str[i] != '\0')
+	j = -1;
+	while (++j < len)
 	{
-		k = 0;
-		while (str[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
-		while (str[i + k] != c && str[i + k] != '\0')
-			k++;
-		if (k > 0)
-			new[j] = ft_strsub(str, i, k);
-		i += k;
-		j++;
+		start = i;
+		while (s[i] && s[i] != c)
+			i++;
+		ret[j] = ft_strsub(s, start, i - start);
+		i++;
 	}
-	return (new);
-}
-
-char		**ft_strsplit(const char *str, char c)
-{
-	char	**new;
-
-	if (str == NULL)
-		return (NULL);
-	if (!(new = (char **)malloc(sizeof(char *) * (ft_wordcount(str, c) + 1))))
-		return (NULL);
-	new = ft_wordadd(str, c, new);
-	new[ft_wordcount(str, c)] = NULL;
-	return (new);
+	ret[j] = NULL;
+	return (ret);
 }

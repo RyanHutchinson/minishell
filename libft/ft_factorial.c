@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_factorial.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:03:46 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:30:54 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/22 15:03:46 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:25:26 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./includes/libft.h"
 
 int		ft_factorial(int nb)
 {

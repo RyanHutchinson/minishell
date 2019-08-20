@@ -1,55 +1,40 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/08/06 19:52:23 by rhutchin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = minishell
 
-NAME =	minishell
+LIBFT_PATH = ./libft/
 
-SRC =	main.c norm.c error.c built_ins.c engine.c exec.c echo.c env_funcs.c cd.c env_builders.c
+SRC_PATH = ./srcs/
 
-DIR_O = obj
-DIR_S = srcs
+SRC_NAME =	main.c prompt.c enviroment.c execute.c input.c command.c bin/cd.c \
+			bin/setenv.c bin/unsetenv.c bin/echo.c argsplit.c
 
-SRCS = $(addprefix $(DIR_S)/,$(SRC))
-OBJECTS = $(addprefix $(DIR_O)/,$(SRC:.c=.o))
+FLAGS = -Wall -Werror -Wextra
 
-INCL = -I./includes -I./libft/includes
+INC =  -I ./includes/minishell.h -I $(LIBFT_PATH)libft.h
 
-$(DIR_O)/%.o: $(DIR_S)/%.c
-	@echo "\033[1;35;m[Compiling $<] \t\033[0m"
-	@gcc -Wall -Werror -Wextra $(INCL) -c -o $@ $<
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
-all: makelibft temp $(NAME)
+SRCO = $(patsubst %.c, %.o, $(SRC))
 
+all: $(NAME)
 
-makelibft:
-	@make -C libft
+$(NAME): $(SRCO)
+	@make -C $(LIBFT_PATH)
+	@gcc $(FLAGS) -o $(NAME) $(SRC) $(LIBFT_PATH)libft.a -lreadline
+	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m Created.\033[0m"
 
-temp:
-	@mkdir -p obj
-
-$(NAME): temp $(OBJECTS)
-	@echo "\033[1;34;m[Making... $(NAME)]\033[0m"
-	@gcc -lreadline -Wall -Werror -Wextra $(OBJECTS) $(INCL) ./libft/libft.a -o $(NAME)
+$(SRC_PATH)%.o: $(SRC_PATH)%.c
+	@gcc $(FLAGS) -c $< -o $@
 
 clean:
-	@make -C libft clean
-	@echo "\033[1;33;m[Cleaning]\033[0m"
-	@rm -f $(OBJECTS)
+	@make -C $(LIBFT_PATH)/ clean
+	@/bin/rm -rf $(SRCO)
+	@echo "\033[31mObjects Files \033[1;31m$(OBJS_LIST)\033[1;0m\033[31mRemoved.\033[0m"
 
 fclean: clean
-	@make -C libft fclean
-	@echo "\033[1;32;m[Force Cleaning]\033[0m"
-	@rm -f $(NAME)
+	@make -C $(LIBFT_PATH)/ fclean
+	@/bin/rm -rf $(NAME)
+	@echo "\033[31mBin \033[1;31m$(NAME)\033[1;0m\033[31m Removed.\033[0m"
 
 re: fclean all
-	@echo "\033[1;31;m[Recompiled]\033[0m"
 
-.PHONY: all clean fclean re
+.PHONY: all fclean clean re

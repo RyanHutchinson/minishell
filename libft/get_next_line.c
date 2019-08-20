@@ -3,79 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 09:59:30 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:37:03 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/29 08:54:19 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/11 09:25:10 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
+#include <stdio.h>
 
-static char	*join_free(char *arr, char *buf)
+void	set_text(char *text[], char *temp, const int fd)
 {
-	char	*ret;
-	size_t	len;
-
-	if (!arr || !buf)
-		return (NULL);
-	len = ft_strlen(arr) + ft_strlen(buf);
-	if (!(ret = ft_strnew(len)))
-		return (NULL);
-	ft_strcpy(ret, arr);
-	ft_strcat(ret, buf);
-	free(arr);
-	return (ret);
+	ft_strdel(&text[fd]);
+	text[fd] = ft_strdup(temp);
+	ft_strdel(&temp);
 }
 
-static int	add_line(char **arr, char **line)
+int		read_file(char *text[], const int fd, char *temp)
 {
-	int		len;
-	char	*tmp;
+	char	buf[BUFF_SIZE + 1];
+	int		red;
 
-	len = 0;
-	while ((*arr)[len] != '\n' && (*arr)[len] != '\0')
-		len++;
-	if (ft_strchr(*arr, '\n') != NULL)
-	{
-		*(ft_strchr(*arr, '\n')) = '\0';
-		*line = ft_strsub(*arr, 0, len);
-		tmp = ft_strdup(ft_strchr(*arr, '\0') + 1);
-		free(*arr);
-		*arr = tmp;
-		if ((*arr)[0] == '\0')
-			ft_strdel(arr);
-	}
-	else
-	{
-		*line = ft_strdup(*arr);
-		ft_strdel(arr);
-	}
+	if ((red = read(fd, buf, BUFF_SIZE)) == 0)
+		return (0);
+	buf[red] = '\0';
+	temp = ft_strjoin(text[fd], buf);
+	set_text(text, temp, fd);
 	return (1);
 }
 
-int			get_next_line(const int fd, char **line)
+int		single_line(char *text[], char **line, const int fd)
 {
-	int			ret;
-	static char	*arr[1024];
-	char		buf[BUFF_SIZE + 1];
+	*line = ft_strdup(text[fd]);
+	ft_strclr(text[fd]);
+	return (1);
+}
 
-	if (fd < 0 || line == NULL)
+int		get_next_line(const int fd, char **line)
+{
+	char		buf[BUFF_SIZE + 1];
+	static char	*text[1024];
+	char		*temp;
+	char		*ptr;
+
+	temp = NULL;
+	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
-	{
-		buf[ret] = '\0';
-		if (arr[fd] == NULL)
-			arr[fd] = ft_strdup(buf);
-		else
-			arr[fd] = join_free(arr[fd], buf);
-		if (ft_strchr(arr[fd], '\n'))
+	if (!text[fd])
+		text[fd] = ft_strnew(0);
+	while ((ptr = ft_strchr(text[fd], '\n')) == NULL)
+		if ((read_file(text, fd, temp)) == 0)
 			break ;
+	if (ft_strlen(text[fd]) != 0)
+	{
+		if (!(ft_strchr(text[fd], '\n')))
+			return (single_line(text, &*line, fd));
+		*ptr = '\0';
+		temp = ft_strdup(ptr + 1);
+		*line = ft_strdup(text[fd]);
+		set_text(text, temp, fd);
 	}
-	if (ret < 0)
-		return (-1);
-	else if (ret == 0 && arr[fd] == NULL)
-		return (0);
 	else
-		return (add_line(&arr[fd], line));
+		return (0);
+	return (1);
 }

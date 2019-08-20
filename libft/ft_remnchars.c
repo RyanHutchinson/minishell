@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.c                                           :+:      :+:    :+:   */
+/*   ft_remnchars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbotes <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 08:49:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 15:02:49 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/06/29 10:53:35 by mbotes            #+#    #+#             */
+/*   Updated: 2019/07/23 11:01:48 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-void	ft_command_parser(char *commands)
+void	ft_remnchars(char **c, size_t n)
 {
-	char **cmds;
+	char	*str;
 
-	if ((cmds = ft_strsplit(commands, ' ')))
-		ft_is_builtin(cmds[0]) ? ft_exec_builtin(cmds) : ft_exec_sys(cmds);
-	else
-		error = 1;
+	str = ft_strdup(*(c) + n);
+	ft_strdel(c);
+	if (str != NULL)
+		*c = ft_strdupdel(&str);
 }

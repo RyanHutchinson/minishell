@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoinchf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.co.za>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/03 09:23:22 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/08/06 19:31:54 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 13:49:42 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/17 13:54:34 by zmahomed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
-int				ft_printf(const char *format, ...)
+char		*ft_strjoinchf(char *str, char c)
 {
-	va_list args;
+	char	*new;
 
-	va_start(args, format);
-	return (ft_format_all(format, args));
+	new = ft_strjoinch(str, c);
+	if (!new)
+		return (NULL);
+	free(str);
+	str = NULL;
+	return (new);
 }

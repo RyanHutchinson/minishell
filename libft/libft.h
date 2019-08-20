@@ -3,36 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zmahomed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 11:49:55 by fremoor           #+#    #+#             */
-/*   Updated: 2019/08/07 08:35:30 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/05/21 11:49:55 by zmahomed          #+#    #+#             */
+/*   Updated: 2019/07/23 13:35:32 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <string.h>
-# include <stdint.h>
-# include <ctype.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <fcntl.h>
-
 # define BUFF_SIZE 32
-# define DEFAULT "\x1b[0m"
-# define RED "\x1b[31m"
-# define GREEN "\x1b[32m"
-# define YELLOW "\x1b[33m"
-# define BLUE "\x1b[34m"
-# define MAGENTA "\x1b[35m"
-# define CYAN "\x1b[36m"
-# define IS_SPACE(x) (x == ' ' || x == '\t' || x == '\r' || x == '\f')
-
-/*
-** libft struct
-*/
 
 typedef struct		s_list
 {
@@ -42,31 +26,15 @@ typedef struct		s_list
 }					t_list;
 
 /*
-** printf struct
-*/
-
-typedef struct		s_format
-{
-	char			t_form;
-	va_list			*ap;
-	unsigned char	flags;
-	unsigned char	p_len;
-	long			prec;
-	long			len;
-	int				neg;
-}					t_format;
-
-/*
 ** Int functions
 */
 
-int					ft_intlen(int num);
+int					get_next_line(const int fd, char **line);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
-int					ft_iswhitespace(char c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_atoi(const char *str);
@@ -82,20 +50,17 @@ int					ft_memcmp(const void *str1, const void *str2, size_t n);
 
 char				*ft_itoa(int n);
 char				*ft_strnew(size_t size);
-char				*ft_str_upper(char *str);
 char				*ft_strdup(const char *s);
-char				*ft_strndup(const char *str, size_t len);
 char				*ft_strtrim(char const *s);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
-char				*ft_strstr(const char *str1, const char *str2);
-char				*ft_strrstr(char *str, char *to_find);
+char				*ft_strstr(char *str, char *to_find);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strcpy(char *dest, const char *srcs);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strnstr(const char *str1, const char *str2, size_t len);
+char				*ft_strnstr(char *str, char *to_find, size_t n);
 char				*ft_strncat(char *dest, const char *src, size_t n);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -155,42 +120,17 @@ char				*ft_strrev(char *str);
 void				ft_foreach(int *tab, int len, void(*f)(int));
 
 /*
-** Get_next_line function
+** Minishell specific
 */
 
-int					get_next_line(const int fd, char **line);
-
-/*
-** Printf functions
-*/
-
-int					ft_width(char **str);
-int					ft_correct_form(char c);
-int					ft_middle_n(t_format *tf);
-int					ft_middle_u(t_format *tf);
-int					ft_middle_x(t_format *tf);
-int					ft_middle_p(t_format *tf);
-int					ft_getstr_all(t_format *tf);
-int					ft_num_len(intmax_t n, int base);
-int					ft_format(char **str, va_list ap);
-int					ft_printf(const char *format, ...);
-int					ft_num_len_u(uintmax_t n, int base);
-int					ft_print_sc(t_format *tf, char *str);
-int					ft_print_sn(t_format *tf, char *str);
-int					ft_print_un(t_format *tf, char *str);
-int					ft_print_ux(t_format *tf, char *str);
-int					ft_print_up(t_format *tf, char *str);
-int					ft_after(t_format *tf, long len, char *str);
-int					ft_format_all(const char *format, va_list ap);
-char				*ft_getstr_d(t_format *tf);
-char				*ft_getstr_p(t_format *tf);
-char				*ft_middle_c(t_format *tf);
-char				*ft_middle_s(t_format *tf);
-char				*ft_itoa_base(intmax_t n, int base);
-char				*ft_getstr_u(t_format *tf, int base);
-char				*ft_itoa_base_u(uintmax_t n, int base);
-char				*ft_appendwchar(wchar_t wc, char *str);
-unsigned char		ft_flags(char **str);
-unsigned char		ft_p_len(char **str);
+char				*ft_strjoinch(char *s1, char c);
+char				*ft_pathjoin(char *s1, char *s2);
+char				*ft_strjoinchf(char *str, char c);
+char				*ft_strjoinf(char *s1, char *s2);
+void				ft_freestrarray(char **str);
+int					ft_starts_with(char *to_start, char *str);
+void				ft_remnchars(char **c, size_t n);
+char				*ft_strdupdel(char **str);
+int					ft_iswhitespace(char c);
 
 #endif
